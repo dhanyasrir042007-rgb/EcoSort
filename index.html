@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSort | Smart Waste Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="EcoSort home"><span class="brand-icon">♻</span><span>EcoSort</span></a>
+    <nav><a href="#dashboard">Dashboard</a><a href="#add-waste">Add Waste</a><a href="#waste-list">Waste List</a></nav>
+    <span class="stage-pill">DSA PROJECT</span>
+  </header>
+
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">SMALL ACTIONS. GREENER FUTURE.</p>
+        <h1>Sort smarter.<br><span>Live greener.</span></h1>
+        <p class="hero-text">Keep waste organized, discover the right category, and make responsible disposal a daily habit.</p>
+        <a class="primary-link" href="#add-waste">＋ Add a waste item</a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div><div class="leaf leaf-one">❧</div><div class="leaf leaf-two">❧</div>
+        <div class="bin bin-green"><span>♻</span><b>RECYCLE</b></div>
+        <div class="bin bin-brown"><span>♧</span><b>ORGANIC</b></div>
+        <div class="ground"></div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="section-block">
+      <div class="section-heading"><div><p class="eyebrow">AT A GLANCE</p><h2>Your waste dashboard</h2></div><span class="live-label"><span></span> Updated instantly</span></div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span class="stat-icon all-icon">▤</span><span class="stat-note">All records</span></div><p class="stat-number" id="total-items">0</p><p class="stat-label">Total waste items</p></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-icon recycle-icon">♻</span><span class="stat-note">Reuse or recycle</span></div><p class="stat-number" id="recyclable-items">0</p><p class="stat-label">Recyclable records</p></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-icon organic-icon">♧</span><span class="stat-note">Natural waste</span></div><p class="stat-number" id="organic-items">0</p><p class="stat-label">Organic records</p></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-icon other-icon">↗</span><span class="stat-note">Other disposal</span></div><p class="stat-number" id="other-items">0</p><p class="stat-label">Non-recyclable records</p></article>
+      </div>
+    </section>
+
+    <section id="add-waste" class="section-block content-grid">
+      <article class="panel add-panel">
+        <div class="panel-heading"><div><p class="eyebrow">NEW RECORD</p><h2>Add waste item</h2></div><span class="heading-icon">＋</span></div>
+        <form id="waste-form">
+          <label for="waste-name">Waste item name</label>
+          <input id="waste-name" name="waste-name" type="text" placeholder="e.g. Plastic bottle" maxlength="60" required>
+          <div class="form-row">
+            <div><label for="waste-quantity">Quantity</label><input id="waste-quantity" name="waste-quantity" type="number" min="1" max="9999" value="1" required></div>
+            <div><label for="waste-unit">Unit</label><select id="waste-unit" name="waste-unit"><option value="item(s)">Items</option><option value="kg">Kilograms (kg)</option><option value="g">Grams (g)</option></select></div>
+          </div>
+          <label for="waste-category">Waste category</label>
+          <select id="waste-category" name="waste-category" required><option value="">Choose a category</option><option value="Recyclable">♻ Recyclable</option><option value="Organic">♧ Organic</option><option value="Non-recyclable">↗ Non-recyclable</option></select>
+          <p class="hint">Tip: Try “plastic bottle”, “banana peel”, or “used tissue”.</p>
+          <button class="primary-button" type="submit">Add to waste list <span>→</span></button>
+          <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </article>
+
+      <article class="panel guide-panel">
+        <div class="panel-heading"><div><p class="eyebrow">QUICK GUIDE</p><h2>Know your waste</h2></div></div>
+        <div class="guide-item"><span class="guide-icon guide-green">♻</span><div><h3>Recyclable</h3><p>Clean paper, cardboard, glass bottles, and many plastic containers.</p></div></div>
+        <div class="guide-item"><span class="guide-icon guide-brown">♧</span><div><h3>Organic</h3><p>Fruit peels, vegetable scraps, leaves, and other food or garden waste.</p></div></div>
+        <div class="guide-item"><span class="guide-icon guide-grey">↗</span><div><h3>Non-recyclable</h3><p>Items that cannot go into your local recycling stream, such as used tissues.</p></div></div>
+        <p class="guide-footnote">Local recycling rules differ. Check your local waste collection guidance.</p>
+      </article>
+    </section>
+
+    <section id="waste-list" class="section-block panel list-panel">
+      <div class="section-heading list-heading"><div><p class="eyebrow">YOUR RECORDS</p><h2>Waste item list</h2><p class="subheading">Search, review, or remove a record.</p></div><span id="record-count" class="count-badge">0 records</span></div>
+      <div class="list-controls"><div class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search waste items..." aria-label="Search waste items"></div><select id="filter-category" aria-label="Filter by category"><option value="All">All categories</option><option value="Recyclable">Recyclable</option><option value="Organic">Organic</option><option value="Non-recyclable">Non-recyclable</option></select><button id="sort-button" class="secondary-button" type="button">Sort A–Z ↕</button></div>
+      <div class="table-wrap"><table><thead><tr><th>Waste item</th><th>Category</th><th>Quantity</th><th>Action</th></tr></thead><tbody id="waste-table-body"></tbody></table></div>
+      <div id="empty-state" class="empty-state"><span>♻</span><h3>Your list is ready</h3><p>Add your first waste item above to see it here.</p></div>
+      <div class="list-footer"><span>EcoSort demo · Data is saved in this browser for now</span><button id="clear-button" class="text-button" type="button">Clear all records</button></div>
+    </section>
+    <footer><span class="footer-brand">♻ EcoSort</span><span>Built for learning Data Structures and Algorithms</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
